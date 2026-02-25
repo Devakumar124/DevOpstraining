@@ -1,0 +1,48 @@
+name: Test project 
+on: 
+  pull_request:
+    type:
+      - opened;
+    branches:
+      - master
+      - 'dev-*' # dev-new, dev-int
+      - 'feat/*' # feat/dev, feat/button
+  workflow_dispatch:
+    push:
+      branches:
+        - master
+        - 'dev-*' # dev-new, dev-int
+        - 'feat/*' # feat/dev, feat/button
+      paths_ignore:
+        - '.github/workflows/*'
+
+jobs: 
+  test: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: code checkout
+        uses: actions/checkout@v3
+      - name: install node-js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 
+      - name: install dependencies
+        run: npm ci
+      - name: run tests
+        run: npm test
+  deploy: 
+    needs: test
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: code checkout
+        uses: actions/checkout@v3
+      - name: install node-js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 
+      - name: install dependencies
+        run: npm ci
+      - name: build project
+        run: npm run build
+      - name: deploy the application
+        run: echo "app deploying....."
