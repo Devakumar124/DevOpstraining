@@ -1,20 +1,20 @@
 name: Test project 
 on: 
   pull_request:
-    type:
-      - opened;
+    types:
+      - opened
     branches:
       - master
       - 'dev-*' # dev-new, dev-int
       - 'feat/*' # feat/dev, feat/button
   workflow_dispatch:
-    push:
-      branches:
-        - master
-        - 'dev-*' # dev-new, dev-int
-        - 'feat/*' # feat/dev, feat/button
-      paths_ignore:
-        - '.github/workflows/*'
+  push:
+    branches:
+      - master
+      - 'dev-*' # dev-new, dev-int
+      - 'feat/*' # feat/dev, feat/button
+    paths-ignore:
+      - '.github/workflows/*'
 
 jobs: 
   test: 
