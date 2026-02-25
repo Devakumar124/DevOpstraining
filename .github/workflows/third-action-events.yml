@@ -11,6 +11,7 @@ on:
   push:
     branches:
       - master
+      - dev
       - 'dev-*' # dev-new, dev-int
       - 'feat/*' # feat/dev, feat/button
     paths-ignore:
